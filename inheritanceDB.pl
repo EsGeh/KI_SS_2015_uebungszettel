@@ -1,44 +1,44 @@
 
 
-human(X) :- male(X); fem(X).
+human(X) :- male(X); female(X).
 
 % -------------------------------
 % persons:
 % -------------------------------
 % siblings start with the same letter
 
-fem(alice) .
+female(alice) .
 male(bob) .
 
 %
-fem(apfelsina) .
+female(apfelsina) .
 male(apfelsinus) .
 
 %-----
 
-fem(claire) .
+female(claire) .
 male(dennis) .
 
-fem(eva) .
+female(eva) .
 male(felix) .
 
 %-----
 
-fem(gerda) .
+female(gerda) .
 male(hans) .
 
-fem(irmela) .
+female(irmela) .
 male(jens) .
 
-fem(kordula) .
+female(kordula) .
 male(l) .
 
-fem(magenta) .
+female(magenta) .
 male(niemand) .
 
 %-----
 
-fem(orangina) .
+female(orangina) .
 male(penis) .
 
 % mother, father, child
@@ -56,11 +56,11 @@ created(magenta, niemand, felix) .
 parent(X,Y) :- created(X, _, Y); created(_, X, Y) .
 
 father(X,Y) :- parent(X,Y), male(X) .
-mother(X,Y) :- parent(X,Y), fem(X) .
+mother(X,Y) :- parent(X,Y), female(X) .
 
 % parent, child
 son(X,Y) :- parent(X,Y), male(Y) .
-daughter(X,Y) :- parent(X,Y), fem(Y) .
+daughter(X,Y) :- parent(X,Y), female(Y) .
 
 % (symmetric)
 sibling(X,Y) :- father(Z,X), father(Z,Y) .
@@ -69,11 +69,11 @@ sibling(X,Y) :- mother(Z,X), mother(Z,Y) .
 
 % X is the brother/sister of Y
 brother(X,Y) :- sibling(X,Y), male(X) .
-sister(X,Y) :- sibling(X,Y), fem(X) .
+sister(X,Y) :- sibling(X,Y), female(X) .
 
 % X is the grandfather of Y
 grandfather(X,Y) :- parent(X,Z), parent(Z,Y), male(X) .
-grandmother(X,Y) :- parent(X,Z), parent(Z,Y), fem(X) .
+grandmother(X,Y) :- parent(X,Z), parent(Z,Y), female(X) .
 
 % predecessor, successor
 predecessor(X,Y) :- parent(X,Y) .
