@@ -7,14 +7,17 @@ human(X) :- male(X); fem(X).
 % -------------------------------
 % siblings start with the same letter
 
-fem(alice) .
-male(bob) .
-
-%
-fem(apfelsina) .
-male(apfelsinus) .
 
 %-----
+% alice and bob are a couple:
+fem(alice) .
+	% siblings of alice
+	fem(apfelsina) . 
+	male(apfelsinus) .
+male(bob) .
+
+%-----
+% alice and bobs parents:
 
 fem(claire) .
 male(dennis) .
@@ -23,6 +26,7 @@ fem(eva) .
 male(felix) .
 
 %-----
+% alice and bobs grandparents:
 
 fem(gerda) .
 male(hans) .
@@ -36,15 +40,18 @@ male(l) .
 fem(magenta) .
 male(niemand) .
 
-%-----
+%----
+% additional persons for testing:
 
 fem(orangina) .
 male(penis) .
 
 % mother, father, child
 created(claire, dennis, alice) .
+	% siblings of alice:
 	created(claire, dennis, apfelsina) .
 	created(claire, dennis, apfelsinus) .
+  created(claire, niemand,orangina) .
 created(eva, felix, bob) .
 
 created(gerda, hans, claire) .
@@ -62,10 +69,12 @@ mother(X,Y) :- parent(X,Y), fem(X) .
 son(X,Y) :- parent(X,Y), male(Y) .
 daughter(X,Y) :- parent(X,Y), fem(Y) .
 
-% (symmetric)
-sibling(X,Y) :- father(Z,X), father(Z,Y) .
-sibling(X,Y) :- mother(Z,X), mother(Z,Y) .
-%sibling(X,Y) :- parent(Z,X), parent(Z,Y) .
+sibling(X,Y) :-
+	created(W,Z,X), created(W,Z,Y) .
+
+half_sibling(X,Y) :-
+	created(Mother, Father1, X), created(Mother, Father2, Y), Father1 \= Father2;
+	created(Mother1, Father, X), created(Mother2, Father, Y), Mother1 \= Mother2 .
 
 % X is the brother/sister of Y
 brother(X,Y) :- sibling(X,Y), male(X) .
