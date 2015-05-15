@@ -1,0 +1,58 @@
+
+\documentclass{article}
+
+\begin{document}
+\title{L\"osungen zum 3. \"Ubungsblatt KI}
+\author{Lukas \and Samuel}
+
+\maketitle
+
+\section*{Aufgabe 1}
+\subsection*{a.}
+\begin{tabular}{*{3}{c}|*{2}{c}}$p$&$q$&$r$&$\{ p|q|r, r=> (p|q), (q \& r)=>p, \sim p | q | r \} $&$(q => p)| \sim(1 => (p | r))$\\
+\hline
+T&T&T&F&T\\
+T&T&F&F&T\\
+T&F&T&F&T\\
+T&F&F&F&T\\
+F&T&T&F&F\\
+F&T&F&F&T\\
+F&F&T&F&T\\
+F&F&F&F&T\\
+\end{tabular}
+
+
+\subsection*{b.}
+\begin{tabular}{*{3}{c}|*{2}{c}}$p$&$q$&$r$&$\{ q|r, q=> \sim p, \sim (r \& p)\}$&$\sim p$\\
+\hline
+T&T&T&F&F\\
+T&T&F&F&F\\
+T&F&T&F&F\\
+T&F&F&F&F\\
+F&T&T&T&T\\
+F&T&F&T&T\\
+F&F&T&T&T\\
+F&F&F&F&T\\
+\end{tabular}
+\section*{Aufgabe 2}
+
+\begin{tabular}{*{4}{c}|*{2}{c}}$p$&$q$&$r$&$c$&$(p \& q \& r) => c$&$c | \sim p | \sim q | \sim r$\\
+\hline
+T&T&T&T&T&T\\
+T&T&T&F&F&F\\
+T&T&F&T&T&T\\
+T&T&F&F&T&T\\
+T&F&T&T&T&T\\
+T&F&T&F&T&T\\
+T&F&F&T&T&T\\
+T&F&F&F&T&T\\
+F&T&T&T&T&T\\
+F&T&T&F&T&T\\
+F&T&F&T&T&T\\
+F&T&F&F&T&T\\
+F&F&T&T&T&T\\
+F&F&T&F&T&T\\
+F&F&F&T&T&T\\
+F&F&F&F&T&T\\
+\end{tabular}
+\end{document}
