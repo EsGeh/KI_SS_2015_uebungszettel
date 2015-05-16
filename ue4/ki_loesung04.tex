@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amssymb, amsmath,anysize}
+\usepackage{amsmath}
+\usepackage[german]{babel}
+\usepackage[applemac]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy} \setlength{\parindent}{0cm}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+\begin{document}
+
+\lhead{Samuel\\Lukas}\chead{KI} \rhead{4. Aufgabenblatt} 
+\lfoot{} \cfoot{\thepage} \rfoot{}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+
+\section*{1. Aufgabe}
+\subsection*{a.}
+\begin{equation*}
+\begin{split}
+\forall Z \exists Y \forall X &(f(X,Y) <=> (f(X,Z) \& \sim f(X,X)))
+\end{split}
+\end{equation*}
+
+Simplify\\
+$\forall Z \exists Y \forall X (f(X,Y) => (f(X,Z) \& \sim f(X,X))) \& ((f(X,Z) \& \sim f(X,X)) => f(X,Y))$ \\
+$\forall Z \exists Y \forall X (\sim f(X,Y) | (f(X,Z) \& \sim f(X,X))) \& (\sim (f(X,Z) \& \sim f(X,X)) | f(X,Y))$ \\
+
+Move negations in\\
+$\forall Z \exists Y \forall X (\sim f(X,Y) | (f(X,Z) \& \sim f(X,X))) \& (\sim f(X,Z) | f(X,X) | f(X,Y))$ \\
+
+Skolemize\\
+$ \exists Y \forall X (\sim f(X,Y) | (f(X,Z) \& \sim f(X,X))) \& (\sim f(X,Z) | f(X,X) | f(X,Y))$ \\
+$\gamma = \{Z\}$ \\
+$ \forall X (\sim f(X,skY(Z)) | (f(X,Z) \& \sim f(X,X))) \& (\sim f(X,Z) | f(X,X) | f(X,skY(Z)))$ \\
+$\gamma = \{Z\}$ \\
+$ (\sim f(X,skY(Z)) | (f(X,Z) \& \sim f(X,X))) \& (\sim f(X,Z) | f(X,X) | f(X,skY(Z)))$ \\
+$\gamma = \{Z,X\}$ \\
+
+Distribute disjunctions\\
+$ (\sim f(X,skY(Z)) | f(X,Z)) \& (\sim f(X,skY(Z)) | \sim f(X,X)) \& (\sim f(X,Z) | f(X,X) | f(X,skY(Z)))$ \\
+
+Convert to CNF\\
+$\{\sim f(X,skY(Z)) | f(X,Z) ,  \sim f(X,skY(Z)) | \sim f(X,X) ,  \sim f(X,Z) | f(X,X) | f(X,skY(Z)) \}$ \\
+
+\subsection*{b.}
+\begin{equation*}
+\begin{split}
+\forall X \forall Y &(q(X,Y) <=> \forall Z (f(Z,X) <=> f(Z,Y))) \\
+\intertext{Simplify}
+\forall X \forall Y &(\sim q(X,Y) | \forall Z ((\sim f(Z,X) | f(Z,Y)) \& (\sim f(Z,Y) | f(Z,X)))) \\
+                 \& &(\sim \forall Z ((\sim f(Z,X) | f(Z,Y)) \& (\sim f(Z,Y) | f(Z,X))) | q(X,Y)) \\
+\intertext{Move negations in}
+\forall X \forall Y &(\sim q(X,Y) | \forall Z ((\sim f(Z,X) | f(Z,Y)) \& (\sim f(Z,Y) | f(Z,X)))) \\
+                 \& &(\exists Z ((f(Z,X) \& \sim f(Z,Y)) | (f(Z,Y) \& \sim f(Z,X))) | q(X,Y)) \\
+\intertext{Rename variables}
+\forall X \forall Y &(\sim q(X,Y) | \forall Z ((\sim f(Z,X) | f(Z,Y)) \& (\sim f(Z,Y) | f(Z,X)))) \\
+                 \& &(\exists A ((f(A,X) \& \sim f(A,Y)) | (f(A,Y) \& \sim f(A,X))) | q(X,Y)) \\
+\intertext{Skolemize}
+                    &(\sim q(X,Y) | ((\sim f(Z,X) | f(Z,Y)) \& (\sim f(Z,Y) | f(Z,X)))) \\
+                 \& &(((f(skA(X,Y),X) \& \sim f(skA(X,Y),Y)) | (f(skA(X,Y),Y) \& \sim f(skA(X,Y),X))) | q(X,Y)) \\
+\intertext{Distribute disjunctions}
+                    &(\sim q(X,Y) | \sim f(Z,X) | f(Z,Y)) \\
+                 \& &(\sim q(X,Y) | \sim f(Z,Y) | f(Z,X)) \\
+                 \& &(f(skA(X,Y),X) | f(skA(X,Y),Y) | q(X,Y)) \\
+                 \& &(f(skA(X,Y),X) | \sim f(skA(X,Y),X) | q(X,Y)) \\
+                 \& &(\sim f(skA(X,Y),Y) | f(skA(X,Y),Y) | q(X,Y)) \\
+                 \& &(\sim f(skA(X,Y),Y) | \sim f(skA(X,Y),X) | q(X,Y)) \\
+\intertext{Convert to CNF}
+                 \{ &(\sim q(X,Y) | \sim f(Z,X) | f(Z,Y)) \\
+                 ,  &(\sim q(X,Y) | \sim f(Z,Y) | f(Z,X)) \\
+                 ,  &(f(skA(X,Y),X) | f(skA(X,Y),Y) | q(X,Y)) \\
+                 ,  &(f(skA(X,Y),X) | \sim f(skA(X,Y),X) | q(X,Y)) \\
+                 ,  &(\sim f(skA(X,Y),Y) | f(skA(X,Y),Y) | q(X,Y)) \\
+                 ,  &(\sim f(skA(X,Y),Y) | \sim f(skA(X,Y),X) | q(X,Y)) \} \\
+\end{split}
+\end{equation*}
+
+
+
+
+
+
+\end{document}
