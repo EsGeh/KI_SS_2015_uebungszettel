@@ -84,8 +84,74 @@ $\{\sim f(X,skY(Z)) | f(X,Z) ,  \sim f(X,skY(Z)) | \sim f(X,X) ,  \sim f(X,Z) | 
 \end{equation*}
 
 
-
-
-
+\section*{3. Aufgabe}
+Folgendes Herbrand Universum und folgende Herbrand Basis besitzt das Modell.
+\begin{equation*}
+\begin{split}
+HU = \{ & max, \\
+        & vater\_von(max), \\
+        & mutter\_von(max), \\
+        & vater\_von(vater\_von(max)), \\
+        & vater\_von(mutter\_von(max)), \\
+        & mutter\_von(vater\_von(max)),\\
+        & mutter\_von(mutter\_von(max)),\\
+        & vater\_von(vater\_von(vater\_von(max))),\\
+        & vater\_von(vater\_von(mutter\_von(max))),\\
+        & vater\_von(mutter\_von(vater\_von(max))),\\
+        & vater\_von(mutter\_von(mutter\_von(max))),\\
+        & ... \}
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+HB = \{ & verheiratet(max,max),\\
+        & verheiratet(max,vater\_von(max)),\\
+        & verheiratet(vater\_von(max),max),\\
+        & verheiratet(vater\_von(max),vater\_von(max)),\\
+        & verheiratet(max,mutter\_von(max)),\\
+        & verheiratet(vater\_von(max),mutter\_von(max)),\\
+        & verheiratet(mutter\_von(max),mutter\_von(max)),\\
+        & verheiratet(mutter\_von(max),max),\\
+        & verheiratet(mutter\_von(max),vater\_von(max)),\\
+        & verheiratet(max,vater\_von(vater\_von(max))),\\
+        & ... \}
+\end{split}
+\end{equation*}
+Folgende Herbrand Interpretation mit $verheiratet(vater\_von(max),mutter\_von(max))$ ist m\"oglich:
+\begin{equation*}
+\begin{split}
+D = \{ & \ddot\smile, \\
+       & v(\ddot\smile), \\
+       & m(\ddot\smile), \\
+       & v(v(\ddot\smile)), \\
+       & v(m(\ddot\smile)), \\
+       & ... \}
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+F  = \{ & max \rightarrow \ddot\smile,\\
+        & vater\_von(max) \rightarrow v(\ddot\smile),\\
+        & mutter\_von(max)\rightarrow  m(\ddot\smile),\\
+        & vater\_von(vater\_von(max))\rightarrow v(v(\ddot\smile)), \\
+        & vater\_von(mutter\_von(max)) \rightarrow v(m(\ddot\smile)), \\
+        & ... \}
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+R  = \{ & verheiratet(\ddot\smile,\ddot\smile) \rightarrow FALSE,\\
+        & verheiratet(\ddot\smile,v(\ddot\smile)) \rightarrow FALSE,\\
+        & verheiratet(v(\ddot\smile),\ddot\smile) \rightarrow FALSE,\\
+        & verheiratet(v(\ddot\smile),v(\ddot\smile)) \rightarrow FALSE,\\
+        & verheiratet(\ddot\smile,m(\ddot\smile)) \rightarrow FALSE,\\
+        & verheiratet(v(\ddot\smile),m(\ddot\smile)) \rightarrow TRUE,\\
+        & verheiratet(m(\ddot\smile),m(\ddot\smile)) \rightarrow FALSE,\\
+        & verheiratet(m(\ddot\smile),\ddot\smile) \rightarrow FALSE,\\
+        & verheiratet(m(\ddot\smile),v(\ddot\smile)) \rightarrow TRUE,\\
+        & verheiratet(\ddot\smile,v(v(\ddot\smile))) \rightarrow FALSE,\\
+        & ... \}
+\end{split}
+\end{equation*}
 
 \end{document}
