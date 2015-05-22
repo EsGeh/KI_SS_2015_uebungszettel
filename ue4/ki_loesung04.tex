@@ -83,6 +83,47 @@ $\{\sim f(X,skY(Z)) | f(X,Z) ,  \sim f(X,skY(Z)) | \sim f(X,X) ,  \sim f(X,Z) | 
 \end{split}
 \end{equation*}
 
+\subsection*{c.}
+\begin{equation*}
+\begin{split}
+\forall X \exists Y &((p(X,Y) <= \forall X \exists T q(Y,X,T) ) => r(Y)) \\
+\intertext{Rename variables}
+\forall X \exists Y &((p(X,Y) <= \forall A \exists T q(Y,A,T) ) => r(Y)) \\
+\intertext{Simplify}
+\forall X \exists Y &(\sim(p(X,Y) | \sim (\forall A \exists T q(Y,A,T))) | r(Y)) \\
+\intertext{Move negations in}
+\forall X \exists Y &((\sim p(X,Y) \& (\forall A \exists T q(Y,A,T))) | r(Y)) \\
+\intertext{Move quantifiers out}
+\forall X \exists Y \forall A \exists T &((\sim p(X,Y) \& q(Y,A,T)) | r(Y)) \\
+\intertext{Skolemize}
+&((\sim p(X,skY(X)) \& q(skY(X),A,skT(X,A))) | r(skY(X))) \\
+\intertext{Distribute disjunctions}
+&(\sim p(X,skY(X)) | r(skY(X))) \& (q(skY(X),A,skT(X,A)) | r(skY(X))) \
+\intertext{Convert to CNF}
+&\{ \sim p(X,skY(X)) | r(skY(X)) , q(skY(X),A,skT(X,A)) | r(skY(X)) \} \
+\end{split}
+\end{equation*}
+
+\subsection*{d.}
+\begin{equation*}
+\begin{split}
+\forall X \forall Z &(p(X,Z) => \exists Y \sim (q(X,Y) | \sim r(Y,Z))) \\
+\intertext{Simplify}
+\forall X \forall Z &(\sim p(X,Z) | \exists Y \sim (q(X,Y) | \sim r(Y,Z))) \\
+\intertext{Move negations in}
+\forall X \forall Z &(\sim p(X,Z) | \exists Y (\sim q(X,Y) \& r(Y,Z))) \\
+\intertext{Move quantifiers out}
+\forall X \forall Z \exists Y &(\sim p(X,Z) | (\sim q(X,Y) \& r(Y,Z))) \\
+\intertext{Skolemize}
+&(\sim p(X,Z) | (\sim q(X,skY(X,Z)) \& r(skY(X,Z),Z))) \\
+\intertext{Distribute disjunctions}
+&(\sim p(X,Z) | \sim q(X,skY(X,Z))) \& (\sim p(X,Z) | r(skY(X,Z),Z)) \\
+\intertext{Convert to CNF}
+&\{ \sim p(X,Z) | \sim q(X,skY(X,Z)), \sim p(X,Z) | r(skY(X,Z),Z) \} \\
+\end{split}
+\end{equation*}
+
+
 
 \section*{3. Aufgabe}
 Folgendes Herbrand Universum und folgende Herbrand Basis besitzt das Modell.
